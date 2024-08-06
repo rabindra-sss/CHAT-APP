@@ -39,7 +39,7 @@ let retryCount = 0
 const maxRetry = 3
 
 const wsLink = new WebSocketLink({
-  uri: `ws://localhost:3000/graphql`,
+  uri: `ws://localhost:3030/graphql`,
   options: {
     reconnect: true,
     connectionParams: {
@@ -80,7 +80,7 @@ const errorLink = onError(({ graphQLErrors, operation, forward }) => {
 })
 
 const uploadLink = createUploadLink({
-  uri: "http://localhost:3000/graphql",
+  uri: "http://localhost:3030/graphql",
   credentials: "include",
   headers: {
     "apollo-require-preflight": "true",
@@ -99,7 +99,7 @@ const link = split(
   ApolloLink.from([errorLink, uploadLink])
 )
 export const client = new ApolloClient({
-  uri: "http://localhost:3000/graphql",
+  uri: "http://localhost:3030/graphql",
   cache: new InMemoryCache({}),
   credentials: "include",
   headers: {
