@@ -4,6 +4,9 @@ FROM node:18
 # Set the working directory
 WORKDIR /usr/src/app
 
+# Add label for image source
+LABEL org.opencontainers.image.source=https://github.com/rabindra-sss/CHAT-APP
+
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
