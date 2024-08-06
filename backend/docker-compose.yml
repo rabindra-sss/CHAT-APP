@@ -44,8 +44,9 @@ services:
       - postgres
       - redis
     environment:
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
+      DATABASE_URL: "postgresql://root:root@postgres:5432/chatapp"
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
     
     
     
