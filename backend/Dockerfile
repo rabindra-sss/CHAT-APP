@@ -4,12 +4,13 @@ FROM node:18
 # Set the working directory
 WORKDIR /usr/src/app
 
+# Add label for image source
+LABEL org.opencontainers.image.source=https://github.com/rabindra-sss/CHAT-APP
+
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
-
-# This will install all the prerequisites needed for Bcrypt, then install node_modules and then compile Bcrypt. 
-# Afterwards it will remove the prerequisites to keep the docker image small as possible.
+# Install dependencies and rebuild Bcrypt from source if needed
 RUN apt-get update && \
     apt-get install -y build-essential python3 && \
     npm install && \
@@ -18,8 +19,6 @@ RUN apt-get update && \
     apt-get autoremove -y && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-
-
 
 # Copy the rest of the application code
 COPY . .
@@ -34,4 +33,4 @@ RUN npm run build
 EXPOSE 3030
 
 # Command to run the application
-CMD ["sh", "-c", "npx prisma migrate dev --name init && npm run start:prod"]
+CMD ["sh", "-c", "npx prisma migrate deploy && npm run start:prod"]
