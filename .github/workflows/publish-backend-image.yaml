@@ -13,6 +13,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build and push the image
+        with:
+            node-version: '20'  # Explicitly set Node.js version
         run: |
           cd backend
           docker login --username rabindra-sss --password ${{secrets.GH_TOKEN}}
