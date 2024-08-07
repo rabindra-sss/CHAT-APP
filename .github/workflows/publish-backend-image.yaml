@@ -2,21 +2,33 @@ name: Docker Image Publish
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build_and_publish:
-
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Build and push the image
+      - name: Checkout repository
+        uses: actions/checkout@v3
         with:
-            node-version: '20'  # Explicitly set Node.js version
+          node-version: '20'  # Explicitly set Node.js version
+
+      - name: Log in to GitHub Container Registry
+        run: echo "${{ secrets.GH_TOKEN }}" | docker login ghcr.io -u rabindra-sss --password-stdin
+      
+      - name: Check working directory
+        run: pwd
+      
+      - name: List files in the current directory
+        run: ls -la
+
+      - name: Check backend directory
+        run: ls -la backend
+
+      - name: Build and push the image
         run: |
-          cd backend
-          docker login --username rabindra-sss --password ${{secrets.GH_TOKEN}}
+          cd backend  # Change directory to backend
           docker build . --tag ghcr.io/rabindra-sss/chat-app-image:latest
           docker push ghcr.io/rabindra-sss/chat-app-image:latest
