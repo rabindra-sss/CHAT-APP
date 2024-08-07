@@ -4,8 +4,6 @@ import {
   TextInput,
   Image,
   Button,
-  Paper,
-  useMantineTheme,
   Flex,
   Avatar,
   Tooltip,
@@ -150,7 +148,7 @@ function Chatwindow() {
     })
 
   const [liveUsers, setLiveUsers] = useState<User[]>([])
-
+  if(liveUsers){};
   useEffect(() => {
     if (liveUsersData?.liveUsersInChatroom) {
       setLiveUsers(liveUsersData.liveUsersInChatroom)

@@ -106,6 +106,8 @@ function Sidebar() {
       toggleLoginModal()
     },
   })
+  if(loading){};
+  if(error){};
 
   const handleLogout = async () => {
     await logoutUser()

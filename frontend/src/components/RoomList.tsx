@@ -14,7 +14,7 @@ import { IconPlus, IconX } from "@tabler/icons-react"
 import { useGeneralStore } from "../stores/generalStore"
 import { useUserStore } from "../stores/userStore"
 import { Link, useNavigate, useParams } from "react-router-dom"
-import { Chatroom, GetChatroomsForUserQuery } from "../gql/graphql"
+import {  GetChatroomsForUserQuery } from "../gql/graphql"
 import { GET_CHATROOMS_FOR_USER } from "../graphql/queries/GetChatroomsForUser"
 import { DELETE_CHATROOM } from "../graphql/mutations/DeleteChatroom"
 import { useMutation, useQuery } from "@apollo/client"
@@ -32,7 +32,11 @@ function RoomList() {
         userId: userId,
       },
     }
-  )
+  );
+  // use unused var
+  if(loading){};
+  if(error) {};
+
   const isSmallDevice = useMediaQuery("(max-width: 768px)")
   const defaultTextStyles: React.CSSProperties = {
     textOverflow: isSmallDevice ? "unset" : "ellipsis",

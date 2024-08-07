@@ -1,4 +1,4 @@
-import React from "react"
+// import React from "react"
 import { User } from "../gql/graphql"
 import { Avatar, Tooltip } from "@mantine/core"
 

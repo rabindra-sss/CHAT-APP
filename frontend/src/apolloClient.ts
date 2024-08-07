@@ -39,7 +39,7 @@ let retryCount = 0
 const maxRetry = 3
 
 const wsLink = new WebSocketLink({
-  uri: `ws://localhost:3030/graphql`,
+  uri: `wss://chat-app-53l0.onrender.com/graphql`,
   options: {
     reconnect: true,
     connectionParams: {
@@ -48,6 +48,7 @@ const wsLink = new WebSocketLink({
   },
 })
 const errorLink = onError(({ graphQLErrors, operation, forward }) => {
+  if(graphQLErrors)
   for (const err of graphQLErrors) {
     if (err.extensions.code === "UNAUTHENTICATED" && retryCount < maxRetry) {
       retryCount++
@@ -80,7 +81,7 @@ const errorLink = onError(({ graphQLErrors, operation, forward }) => {
 })
 
 const uploadLink = createUploadLink({
-  uri: "http://localhost:3030/graphql",
+  uri: "https://chat-app-53l0.onrender.com/graphql",
   credentials: "include",
   headers: {
     "apollo-require-preflight": "true",
@@ -99,7 +100,7 @@ const link = split(
   ApolloLink.from([errorLink, uploadLink])
 )
 export const client = new ApolloClient({
-  uri: "http://localhost:3030/graphql",
+  uri: "https://chat-app-53l0.onrender.com/graphql",
   cache: new InMemoryCache({}),
   credentials: "include",
   headers: {

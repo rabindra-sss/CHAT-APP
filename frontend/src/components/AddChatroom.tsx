@@ -14,7 +14,7 @@ import {
   Chatroom,
   CreateChatroomMutation,
   SearchUsersQuery,
-  User,
+  
 } from "../gql/graphql"
 import { useMutation, useQuery } from "@apollo/client"
 import { useForm } from "@mantine/form"
@@ -24,7 +24,6 @@ import { ADD_USERS_TO_CHATROOM } from "../graphql/mutations/AddUsersToChatroom"
 
 function AddChatroom() {
   const [active, setActive] = useState(1)
-  const [highestStepVisited, setHighestStepVisited] = useState(active)
 
   const isCreateRoomModalOpen = useGeneralStore(
     (state) => state.isCreateRoomModalOpen
@@ -41,7 +40,6 @@ function AddChatroom() {
     }
 
     setActive(nextStep)
-    setHighestStepVisited((hSC) => Math.max(hSC, nextStep))
   }
 
   const [createChatroom, { loading }] =
@@ -81,7 +79,7 @@ function AddChatroom() {
   const { data, refetch } = useQuery<SearchUsersQuery>(SEARCH_USERS, {
     variables: { fullname: searchTerm },
   })
-  const [addUsersToChatroom, { loading: loadingAddUsers }] =
+  const [addUsersToChatroom,] =
     useMutation<AddUsersToChatroomMutation>(ADD_USERS_TO_CHATROOM, {
       refetchQueries: ["GetChatroomsForUser"],
     })
