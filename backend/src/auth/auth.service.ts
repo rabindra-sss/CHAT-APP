@@ -69,10 +69,8 @@ export class AuthService {
       expiresIn: '7d',
     });
 
-    response.cookie('access_token', accessToken, { httpOnly: true });
-    response.cookie('refresh_token', refreshToken, {
-      httpOnly: true,
-    });
+    response.cookie('access_token', accessToken, { httpOnly: true, secure: true, sameSite: 'none' });
+    response.cookie('refresh_token', refreshToken, { httpOnly: true, secure: true, sameSite: 'none' });
     return { user };
   }
 

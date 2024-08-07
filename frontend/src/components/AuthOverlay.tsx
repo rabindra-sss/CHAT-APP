@@ -165,8 +165,11 @@ function AuthOverlay() {
   }
 
   const Login = () => {
-    const [loginUser, { loading, error, data }] =
+    const [loginUser, { loading, error, data}] =
       useMutation<LoginUserMutation>(LOGIN_USER)
+    //use unused var
+    if(error){};
+    if(data){};
     const setUser = useUserStore((state) => state.setUser)
     const setIsLoginOpen = useGeneralStore((state) => state.toggleLoginModal)
     const [errors, setErrors] = React.useState<GraphQLErrorExtensions>({})

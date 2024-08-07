@@ -12,7 +12,7 @@ dotenv.config();
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
-    origin: 'http://localhost:5173',
+    origin: ['http://localhost:5173', 'https://66b3dd3073f2f6258a0c7676--unique-daffodil-d84d80.netlify.app'], 
     credentials: true,
     // all headers that client are allowed to use
     allowedHeaders: [
